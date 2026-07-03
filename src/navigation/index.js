@@ -123,7 +123,7 @@ function LoadingScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center' }}>
       <Ionicons name="trophy" size={56} color={colors.neonBlue} />
-      <Text style={[typography.h3, { marginTop: 16 }]}>ARENA ESPORTS</Text>
+      <Text style={[typography.h3, { marginTop: 16 }]}>GANJAM TOURNAMENT</Text>
     </View>
   );
 }

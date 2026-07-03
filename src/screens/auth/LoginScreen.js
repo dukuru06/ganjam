@@ -43,7 +43,7 @@ export default function LoginScreen({ navigation }) {
     <ScreenContainer style={{ justifyContent: 'center', flexGrow: 1 }}>
       <View style={{ alignItems: 'center', marginBottom: spacing.xxl }}>
         <Ionicons name="trophy" size={56} color={colors.neonBlue} />
-        <Text style={[typography.h1, { marginTop: spacing.md }]}>ARENA ESPORTS</Text>
+        <Text style={[typography.h1, { marginTop: spacing.md }]}>GANJAM TOURNAMENT</Text>
         <Text style={typography.caption}>Compete. Win. Dominate.</Text>
       </View>
 
