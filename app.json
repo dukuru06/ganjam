@@ -24,7 +24,20 @@
       "expo-notifications",
       "expo-asset",
       "expo-font",
-      ["expo-build-properties", { "android": { "usesCleartextTraffic": true } }]
-    ]
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "bd1c0a57-a295-4835-96c0-7f0b963b898d"
+      }
+    },
+    "owner": "dukuru"
   }
 }
