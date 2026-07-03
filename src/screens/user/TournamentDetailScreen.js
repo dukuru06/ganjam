@@ -39,7 +39,7 @@ export default function TournamentDetailScreen({ route, navigation }) {
   const isConfirmed = reg?.status === 'confirmed';
 
   const onShare = async () => {
-    const msg = `🎮 ${t.name} (${t.game})\n🏆 Prize Pool: ${formatINR(t.prizePool)}\n💰 Entry: ${t.entryFee > 0 ? formatINR(t.entryFee) : 'FREE'}\n📅 ${formatDateTime(t.date)}\n\nJoin now on Arena Esports!`;
+    const msg = `🎮 ${t.name} (${t.game})\n🏆 Prize Pool: ${formatINR(t.prizePool)}\n💰 Entry: ${t.entryFee > 0 ? formatINR(t.entryFee) : 'FREE'}\n📅 ${formatDateTime(t.date)}\n\nJoin now on Ganjam Tournament!`;
     if (Platform.OS === 'web') {
       await Clipboard.setStringAsync(msg);
       notify('Copied', 'Tournament details copied to clipboard.');

@@ -58,7 +58,7 @@ export default function AdminSettingsScreen() {
 
       <SectionHeader title="💳 UPI Payment Details" />
       <Input label="UPI ID" value={form.upiId || ''} onChangeText={set('upiId')} placeholder="yourname@upi" autoCapitalize="none" />
-      <Input label="UPI Display Name" value={form.upiName || ''} onChangeText={set('upiName')} placeholder="Arena Esports" />
+      <Input label="UPI Display Name" value={form.upiName || ''} onChangeText={set('upiName')} placeholder="Ganjam Tournament" />
       <GlassCard onPress={changeQr} style={{ alignItems: 'center' }}>
         {form.qrCodeUrl ? (
           <Image source={{ uri: form.qrCodeUrl }} style={styles.qr} />
