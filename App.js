@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
@@ -7,8 +8,18 @@ import { AuthProvider } from './src/context/AuthContext';
 import RootNavigator from './src/navigation';
 
 export default function App() {
-  const [fontsLoaded] = useFonts({ ...Ionicons.font });
-  if (!fontsLoaded) return null;
+  const [fontsLoaded, fontError] = useFonts({ ...Ionicons.font });
+  const [timedOut, setTimedOut] = useState(false);
+
+  // Don't let a stuck/failed font load leave the app on a blank screen forever.
+  useEffect(() => {
+    const t = setTimeout(() => setTimedOut(true), 3000);
+    return () => clearTimeout(t);
+  }, []);
+
+  if (!fontsLoaded && !fontError && !timedOut) {
+    return <View style={{ flex: 1, backgroundColor: '#0A0A12' }} />;
+  }
 
   return (
     <SafeAreaProvider>
