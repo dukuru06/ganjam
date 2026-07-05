@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
     "backgroundColor": "#0A0A12",
+    "icon": "./assets/icon.png",
     "splash": {
       "backgroundColor": "#0A0A12",
       "resizeMode": "contain"
@@ -15,10 +16,15 @@
       "versionCode": 1,
       "permissions": [
         "NOTIFICATIONS"
-      ]
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0A0A12"
+      }
     },
     "web": {
-      "bundler": "metro"
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-notifications",

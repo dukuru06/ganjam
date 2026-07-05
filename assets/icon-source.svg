@@ -1,0 +1,40 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#14141F"/>
+      <stop offset="100%" stop-color="#0A0A12"/>
+    </radialGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="46%" r="50%">
+      <stop offset="0%" stop-color="#00D4FF" stop-opacity="0.35"/>
+      <stop offset="55%" stop-color="#A855F7" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="trophyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE770"/>
+      <stop offset="45%" stop-color="#FFC300"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bgGrad)"/>
+  <circle cx="512" cy="470" r="360" fill="url(#glowGrad)"/>
+
+  <!-- handles -->
+  <path d="M336,330 C250,340 250,440 350,440" fill="none" stroke="url(#trophyGrad)" stroke-width="34" stroke-linecap="round"/>
+  <path d="M688,330 C774,340 774,440 674,440" fill="none" stroke="url(#trophyGrad)" stroke-width="34" stroke-linecap="round"/>
+
+  <!-- bowl with star cutout -->
+  <path fill-rule="evenodd" fill="url(#trophyGrad)" d="
+    M330,300 C300,380 380,460 452,480 L572,480 C644,460 724,380 694,300 Q512,325 330,300 Z
+    M512,348 L522.6,377.4 L553.8,378.4 L529.1,397.6 L537.9,427.6 L512,410 L486.1,427.6 L494.9,397.6 L470.2,378.4 L501.4,377.4 Z
+  "/>
+
+  <!-- stem -->
+  <path fill="url(#trophyGrad)" d="M452,480 L572,480 L542,590 L482,590 Z"/>
+
+  <!-- collar -->
+  <rect x="392" y="590" width="240" height="40" rx="10" fill="url(#trophyGrad)"/>
+
+  <!-- base -->
+  <rect x="352" y="630" width="320" height="50" rx="14" fill="url(#trophyGrad)"/>
+</svg>
