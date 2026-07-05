@@ -1,10 +1,10 @@
 // Base URL of the backend server (server/index.js).
-// - Web (localhost:8081) can reach the API at localhost.
-// - Android via Expo Go needs the PC's LAN IP instead of localhost (edit below).
+// - Web (localhost:8081) hits your locally-running server for fast local dev.
+// - Android (installed APK) hits the deployed Render backend so it works on any network.
 import { Platform } from 'react-native';
 
-const LAN_IP = '192.168.1.78'; // update if your PC's IP changes
-export const API_BASE_URL = Platform.OS === 'web' ? 'http://localhost:4000' : `http://${LAN_IP}:4000`;
+const DEPLOYED_API_URL = 'https://arena-esports-api.onrender.com';
+export const API_BASE_URL = Platform.OS === 'web' ? 'http://localhost:4000' : DEPLOYED_API_URL;
 
 let authToken = null;
 export function setAuthToken(token) {
