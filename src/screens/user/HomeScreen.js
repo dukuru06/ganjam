@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { ScreenContainer, GlassCard, SectionHeader, Skeleton } from '../../components/ui';
 import BannerSlider from '../../components/BannerSlider';
 import TournamentCard from '../../components/TournamentCard';
-import { watchHomeContent, watchWinners } from '../../services/cmsService';
+import { watchHomeContent, watchWinners, watchGallery } from '../../services/cmsService';
 import { watchTournaments, getTournament } from '../../services/tournamentService';
 import { useAuth } from '../../context/AuthContext';
 import { colors, spacing, typography, radius } from '../../theme';
@@ -16,10 +16,12 @@ export default function HomeScreen({ navigation }) {
   const [upcoming, setUpcoming] = useState([]);
   const [featured, setFeatured] = useState(null);
   const [winners, setWinners] = useState([]);
+  const [gallery, setGallery] = useState([]);
 
   useEffect(() => watchHomeContent(setContent), []);
   useEffect(() => watchTournaments((list) => setUpcoming(list.slice(0, 5)), { status: 'upcoming' }), []);
   useEffect(() => watchWinners((list) => setWinners(list.slice(0, 5))), []);
+  useEffect(() => watchGallery((list) => setGallery(list.slice(0, 8))), []);
   useEffect(() => {
     if (content?.featuredTournamentId) {
       getTournament(content.featuredTournamentId).then(setFeatured).catch(() => setFeatured(null));
@@ -136,6 +138,18 @@ export default function HomeScreen({ navigation }) {
         </>
       )}
 
+      {gallery.length > 0 && (
+        <>
+          <SectionHeader title="📸 Gallery" action="See all"
+            onAction={() => navigation.navigate('Gallery')} />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {gallery.map((g) => (
+              <Image key={g.id} source={{ uri: g.imageUrl }} style={styles.galleryImg} />
+            ))}
+          </ScrollView>
+        </>
+      )}
+
       <View style={styles.socialRow}>
         {Object.entries(socialIcons).map(([key, icon]) =>
           socials[key] ? (
@@ -156,6 +170,7 @@ const styles = StyleSheet.create({
   winnerImg: { width: 60, height: 60, borderRadius: 30 },
   sponsor: { alignItems: 'center', marginRight: spacing.xl },
   sponsorImg: { width: 56, height: 56, borderRadius: radius.md, marginBottom: 4 },
+  galleryImg: { width: 100, height: 100, borderRadius: radius.md, marginRight: spacing.sm },
   socialRow: { flexDirection: 'row', justifyContent: 'center', gap: spacing.lg, marginTop: spacing.xxl },
   socialBtn: {
     width: 44, height: 44, borderRadius: 22, backgroundColor: colors.card,

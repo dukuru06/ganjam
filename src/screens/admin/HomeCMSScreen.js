@@ -12,7 +12,7 @@ export default function HomeCMSScreen() {
   const [content, setContent] = useState(null);
   const [tournaments, setTournaments] = useState([]);
   const [announcement, setAnnouncement] = useState('');
-  const [news, setNews] = useState({ title: '', body: '' });
+  const [news, setNews] = useState({ title: '', body: '', imageUrl: null });
   const [sponsor, setSponsor] = useState('');
   const [socials, setSocials] = useState(null);
 
@@ -50,10 +50,19 @@ export default function HomeCMSScreen() {
     setAnnouncement('');
   };
 
+  const pickNewsImage = async () => {
+    try {
+      const url = await pickAndUpload('news', [16, 9]);
+      if (url) setNews((n) => ({ ...n, imageUrl: url }));
+    } catch (e) {
+      notify('Error', e.message);
+    }
+  };
+
   const addNews = async () => {
     if (!news.title.trim()) return notify('Missing', 'News title required');
     await updateHomeContent({ news: [{ ...news }, ...newsList] });
-    setNews({ title: '', body: '' });
+    setNews({ title: '', body: '', imageUrl: null });
   };
 
   const addSponsor = async () => {
@@ -114,12 +123,23 @@ export default function HomeCMSScreen() {
       <SectionHeader title="📰 News" />
       {newsList.map((n, i) => (
         <GlassCard key={i} style={styles.rowCard}>
+          {n.imageUrl ? <Image source={{ uri: n.imageUrl }} style={styles.newsThumb} /> : null}
           <Text style={[typography.body, { flex: 1 }]} numberOfLines={1}>{n.title}</Text>
           <TouchableOpacity onPress={() => updateHomeContent({ news: newsList.filter((_, j) => j !== i) })}>
             <Ionicons name="close-circle" size={20} color={colors.danger} />
           </TouchableOpacity>
         </GlassCard>
       ))}
+      <TouchableOpacity onPress={pickNewsImage} style={styles.newsImagePicker}>
+        {news.imageUrl ? (
+          <Image source={{ uri: news.imageUrl }} style={styles.newsImagePreview} />
+        ) : (
+          <>
+            <Ionicons name="image-outline" size={24} color={colors.textMuted} />
+            <Text style={typography.caption}>Tap to add image (optional)</Text>
+          </>
+        )}
+      </TouchableOpacity>
       <Input value={news.title} onChangeText={(v) => setNews((n) => ({ ...n, title: v }))} placeholder="News title" />
       <Input value={news.body} onChangeText={(v) => setNews((n) => ({ ...n, body: v }))} placeholder="News body" multiline />
       <NeonButton title="+ ADD NEWS" variant="outline" onPress={addNews} />
@@ -159,4 +179,11 @@ const styles = StyleSheet.create({
   },
   rowCard: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, paddingVertical: spacing.md },
   sponsorLogo: { width: 32, height: 32, borderRadius: radius.sm },
+  newsThumb: { width: 32, height: 32, borderRadius: radius.sm },
+  newsImagePicker: {
+    height: 100, borderRadius: radius.md, borderWidth: 1, borderColor: colors.cardBorder,
+    borderStyle: 'dashed', alignItems: 'center', justifyContent: 'center', marginBottom: spacing.sm,
+    overflow: 'hidden',
+  },
+  newsImagePreview: { width: '100%', height: '100%' },
 });
